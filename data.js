@@ -1,4 +1,6 @@
 
+// Двусвязный список
+
 
 function Node(value) {
     this.data = value;
@@ -154,10 +156,4 @@ function generateEvents(n) {
         let record = new Record(name, date);
         Data.add(record);
     }
-}
-
-
-for (let i = 0; i < Data._length; i++) {
-    let elem = Data.index(i);
-    //console.log(elem.data._date, elem.data._name);
 }

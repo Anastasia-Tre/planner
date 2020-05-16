@@ -1,4 +1,7 @@
 
+// Фильтр по дню, недели, месяцу
+
+
 let listByDay, listByWeek, listByMonth;
 let date = new Date();
 
@@ -13,7 +16,7 @@ function sortByDay(date) {
             listByDay.add(record);
         }
     }
-    
+
     return listByDay;
 }
 

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+        <title>Calendar</title>
+        <meta charset='utf-8' />
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="loader.js"></script>
+	</head>
+	<body>
+
+        <!-- <div class="header">
+            <h1>Calendar</h1>
+        </div> -->
+
+        <div class="topnav">
+                <p>Calendar</p>
+                <p id="date"></p>
+                <p id="time"></p>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#" style="float:right">Link</a>
+        </div>
+
+        <div class="calendarplace">
+                <div class="minicalendar">
+                        <table id="mini-calendar">
+                                <tr>
+                                        <td id="arrow_left">&#8249;</td>
+                                        <th colspan="5" id="month"></th>
+                                        <td id="arrow_right">&#8250;</td>
+                                </tr>
+                                <tr>
+                                        <th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th>
+                                </tr>
+                                <tbody id="body_mini_calendar"></tbody>
+                        </table>
+                </div>
+        </div>
+
+        <div class="workplace">
+
+                <div class="tab">
+                        <button class="tablinks" onclick="draw(1)">Day</button>
+                        <button class="tablinks" onclick="draw(2)">Week</button>
+                        <button class="tablinks" onclick="draw(3)">Month</button>
+                </div>
+
+                <div class="day">
+        
+                        <table id='table_event' class="day_text"></table>
+                </div>
+        </div>
+
+
+	</body>
+</html>

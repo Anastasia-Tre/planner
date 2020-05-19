@@ -3,10 +3,11 @@
 
 class Record {
 
-    constructor(name, date, text) {
+    constructor(name, date, text, id) {
         this.name = name;
         this.date = date;
         this.text = text;
+        this.id = this.getId();
     }
 
     get name() {
@@ -42,4 +43,22 @@ class Record {
         this._text = value;
     }
 
+    get id() {
+        return this._id
+    }
+
+    set id(value) {
+        if (value == undefined) {
+            value = 0;
+        }
+        this._id = value;
+    }
+
+    getId() {
+        let str = this._name+this._date;
+        return str.replace(/ /g, '');
+    }
 }
+
+
+module.exports = Record;

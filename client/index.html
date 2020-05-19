@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+    <title>Calendar</title>
+</head>
+<body>
+
+    <div class="container" style="padding-top: 50px;">
+        <div class="row">
+            <div class="col s10" id="records">
+
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red modal-trigger" data-target="createForm">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+    <div id="createForm" class="modal">
+        <div class="modal-content">
+            <h4>Create new record</h4>
+            <h4 style="color: white;">\n</h4>
+            <div class="input-field">
+                <input placeholder="name" id="name" type="text" class="validate">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="date" id="date" type="text" class="datepicker">
+                <label for="date">Date</label>
+            </div>
+            <div class="input-field">
+                <input placeholder="time" id="time" type="text" class="timepicker">
+                <label for="time">Time</label>
+            </div>
+            <div class="input-field">
+                <textarea placeholder="text" id="text" class="materialize-textarea"></textarea>
+                <label for="text">Text</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn" id="createRecord">Save</a>    
+        </div>
+    </div>
+    
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>
+

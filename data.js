@@ -1,16 +1,13 @@
 'use strict';
 
 const fs = require('fs');
-
 const Record = require('./record');
-// generateEvents(10);
+
+//generateEvents(100);
 
 function writeToJSON(record) {
-
   const file = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
-
   file.push(record);
-
   fs.writeFileSync('data.json', JSON.stringify(file, null, 2));
 }
 
@@ -35,7 +32,7 @@ function generateEvents(n) {
   for (let i = 0; i < n; i++) {
     const name = names[randomInteger(0, names.length)] + ' with ' +
           people[randomInteger(0, people.length)];
-    const date = new Date(2020, 3, randomInteger(1, 31));
+    const date = new Date(2020, 4, randomInteger(1, 31), randomInteger(0, 23));
     const record = new Record(name, date);
     writeToJSON(record);
   }

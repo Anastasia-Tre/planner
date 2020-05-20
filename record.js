@@ -56,8 +56,7 @@ class Record {
   }
 
   getId() {
-    const str = this._name + this._date;
-    return str.replace(/ /g, '');
+    return new Date().getTime();
   }
 }
 

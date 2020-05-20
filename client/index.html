@@ -5,14 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css">
       
     <title>Calendar</title>
 </head>
-<body>
+<body class="">
 
     <div class="container" style="padding-top: 50px;">
         <div class="row">
-            <div class="col s10" id="records">
+            <div class="col s10">
+                <div>
+                    <nav class="nav-extended">
+                        <div class="nav-content purple darken-4 row">
+                          <ul class="tabs tabs-transparent col s8">
+                            <li class="tab"><a id="sort-all" class="sort">All</a></li>
+                            <li class="tab"><a id="sort-day" class="sort">Day</a></li>
+                            <li class="tab"><a id="sort-week" class="sort">Week</a></li>
+                            <li class="tab"><a id="sort-month" class="sort">Month</a></li>
+                          </ul>
+                          <ul class="right col s3">
+                            <div class="input-field">
+                                <input style="color: aliceblue;" placeholder="Сhoose date" id="sort-date" type="text" class="datepicker">
+                            </div>
+                          </ul>
+                          
+                        </div>
+                      </nav>
+                </div>
+                <div id="records"></div>
 
                 
                 
@@ -21,7 +41,7 @@
     </div>
 
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red modal-trigger" data-target="createForm">
+        <a class="btn-floating btn-large purple darken-4 modal-trigger" data-target="createForm">
           <i class="large material-icons">add</i>
         </a>
     </div>
@@ -48,7 +68,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="waves-effect waves-light btn" id="createRecord">Save</a>    
+            <a class="waves-effect waves-light purple darken-4 btn" id="createRecord">Save</a>    
         </div>
     </div>
     

@@ -17,3 +17,5 @@ app.use(express.static(clientPath));
 app.listen(port, () => {
   console.log(`Server has been started on port ${port}`);
 });
+
+

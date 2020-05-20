@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Calendar = require('../json_data');
+const Calendar = require('../data.js');
 const Record = require('../record');
 
 // http://localhost:5000/api/record/record (GET)
@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
   const records = await Calendar.showAll();
   res.status(200).json(records);
 });
+
 
 // http://localhost:5000/api/record/record (POST)
 router.post('/', async (req, res) => {

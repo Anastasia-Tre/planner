@@ -22,7 +22,7 @@ const card = record => {
       </div>
       <div class="col">
         <div class="card-action">
-          <button class="btn btn-small red">
+          <button class="btn btn-small purple darken-4">
             <i class="material-icons js-remove" record-id="${record._id}">delete
             </i>
           </button>
@@ -82,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('#records').addEventListener('click', onDeletePost);
 
+  document.querySelector('#sort-day').addEventListener('click', sortBy);
+  document.querySelector('#sort-week').addEventListener('click', sortBy);
+  document.querySelector('#sort-month').addEventListener('click', sortBy);
+  document.querySelector('#sort-all').addEventListener('click', sortBy);
+
 });
 
 function renderRecords(_records = []) {
@@ -102,21 +107,18 @@ function onCreateRecord() {
   const $time = document.querySelector('#time');
   const $text = document.querySelector('#text');
 
-  instancesDate[0].date.setHours(instancesTime[0].hours,
+  instancesDate[1].date.setHours(instancesTime[0].hours,
     instancesTime[0].minutes);
 
   if ($name.value && $date.value && $time.value) {
     const newRecord = {
       name: $name.value,
-      date: instancesDate[0].date,
+      date: instancesDate[1].date,
       text: $text.value
     };
 
-    //console.log(newRecord);
-
     RecordApi.create(newRecord).then(record => {
       records.push(record);
-      //console.log(record);
       renderRecords(records);
     });
     modal.close();
@@ -144,4 +146,59 @@ function onDeletePost(event) {
       });
     }
   }
+}
+
+
+function sortBy() {
+
+  const param = event.target.id;
+
+  const elemsOfSort = document.querySelectorAll('.sort');
+  for (const elem of elemsOfSort) {
+    elem.classList.remove('active');
+  }
+  document.getElementById(param).classList.add('active');
+
+  const date = instancesDate[0].date || new Date();
+
+  const sortedRecords = records.sort((a, b) =>
+    (new Date(a._date) >= new Date(b._date) ? 1 : -1));
+
+  let result = [];
+
+  if (param === 'sort-day') {
+    for (const elem of sortedRecords) {
+      if (new Date(elem._date).getFullYear() === date.getFullYear() &&
+      new Date(elem._date).getMonth() === date.getMonth() &&
+      new Date(elem._date).getDate() === date.getDate()) {
+        result.push(elem);
+      }
+    }
+  }
+
+  if (param === 'sort-week') {
+    const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay()));
+    const dayOfWeek2 = new Date(date.setDate(dayOfWeek1.getDate() + 7));
+
+    for (const elem of sortedRecords) {
+      if (new Date(elem._date) >= dayOfWeek1 &&
+      new Date(elem._date) <= dayOfWeek2) {
+        result.push(elem);
+      }
+    }
+  }
+
+  if (param === 'sort-month') {
+    for (const elem of sortedRecords) {
+      if (new Date(elem._date).getFullYear() === date.getFullYear() &&
+      new Date(elem._date).getMonth() === date.getMonth()) {
+        result.push(elem);
+      }
+    }
+  }
+
+  if (param === 'sort-all') {
+    result = sortedRecords;
+  }
+  renderRecords(result);
 }

@@ -1,0 +1,22 @@
+.datepicker-date-display
+{  
+  background-color: #4a148c;  
+}
+
+.datepicker-calendar-container {
+    color: black;
+}
+.is-today {
+    color: #4a148c !important;
+
+}
+.datepicker-table td.is-selected {
+    background: #4a148c !important;
+}
+.datepicker-cancel, .datepicker-done {
+    color: #4a148c;
+}
+
+.dropdown-content li>a, .dropdown-content li>span{
+    color: black;
+}    

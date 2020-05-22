@@ -1,7 +1,7 @@
 # Planner
 ## Concept
 This application allows you to create and delete an event-record, as well as sort records depending on the selected date by day, week or month.
-Requirements
+## Requirements
 •	Node.js v12.5.0 or later (v14 preferred)
 •	Any browser
 ## Usage

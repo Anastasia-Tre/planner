@@ -1,7 +1,5 @@
 'use strict';
 
-// Клас запись-событие
-
 class Record {
 
   constructor(name, date, text) {

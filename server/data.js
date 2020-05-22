@@ -6,9 +6,9 @@ const Record = require('./record');
 //generateEvents(100);
 
 function writeToJSON(record) {
-  const file = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+  const file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
   file.push(record);
-  fs.writeFileSync('data.json', JSON.stringify(file, null, 2));
+  fs.writeFileSync('./server/data.json', JSON.stringify(file, null, 2));
 }
 
 function randomInteger(min, max) {
@@ -43,22 +43,22 @@ function generateEvents(n) {
 class Calendar {
 
   showAll() {
-    this.file = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+    this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     return this.file;
   }
 
   save(record) {
-    this.file = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+    this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     this.file.push(record);
-    fs.writeFileSync('data.json', JSON.stringify(this.file, null, 2));
+    fs.writeFileSync('./server/data.json', JSON.stringify(this.file, null, 2));
     return record;
   }
 
   remove(id) {
-    this.file = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+    this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     const recordIndex = this.file.findIndex(record => record._id === id);
     this.file.splice(recordIndex, 1);
-    fs.writeFileSync('data.json', JSON.stringify(this.file, null, 2));
+    fs.writeFileSync('./server/data.json', JSON.stringify(this.file, null, 2));
   }
 
 }

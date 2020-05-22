@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const recordRouter = require('./routes/record');
+const recordRouter = require('./server/routes');
 
 const port = 5000;
 const clientPath = path.join(__dirname, 'client');

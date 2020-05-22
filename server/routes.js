@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const Calendar = require('../data.js');
-const Record = require('../record');
+const Calendar = require('./data.js');
+const Record = require('./record');
 
 // http://localhost:5000/api/record/record (GET)
 router.get('/', async (req, res) => {

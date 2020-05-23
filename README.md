@@ -6,8 +6,8 @@ This application allows you to create and delete an event-record, as well as sor
 * Any browser
 ## Usage
 1.	Сlone this repository
-2.	Run npm install to install dependencies
-3.	Run project with npm run start 
+2.	Run `npm install` to install dependencies
+3.	Run project with `npm run start` 
 4.	Open in browser http://localhost:5000/
 ## License
 Copyright (c) 2020 Anastasiya Trembach. MIT License

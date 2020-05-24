@@ -3,15 +3,24 @@
 const fs = require('fs');
 const Record = require('./record');
 
-
 class Calendar {
 
+  checkfile() {
+    try {
+      this.file = fs.readFileSync('./server/data.json', 'utf-8');
+    } catch (error) {
+      fs.writeFileSync('./server/data.json', '[]');
+    }
+  }
+
   showAll() {
+    this.checkfile();
     this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     return this.file;
   }
 
   save(record) {
+    this.checkfile();
     this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     this.file.push(record);
     fs.writeFileSync('./server/data.json', JSON.stringify(this.file, null, 2));
@@ -19,6 +28,7 @@ class Calendar {
   }
 
   remove(id) {
+    this.checkfile();
     this.file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));
     const recordIndex = this.file.findIndex(record => record._id === id);
     this.file.splice(recordIndex, 1);
@@ -27,7 +37,7 @@ class Calendar {
 
 }
 
-//generateEvents(10);
+//generateEvents(1);
 
 function writeToJSON(record) {
   const file = JSON.parse(fs.readFileSync('./server/data.json', 'utf-8'));

@@ -177,7 +177,7 @@ function sortBy() {
   }
 
   if (param === 'sort-week') {
-    const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay()));
+    const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay() - 1));
     const dayOfWeek2 = new Date(date.setDate(dayOfWeek1.getDate() + 7));
 
     for (const elem of sortedRecords) {

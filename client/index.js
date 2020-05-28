@@ -130,8 +130,6 @@ function onCreateRecord() {
   }
 }
 
-
-
 function onDeletePost(event) {
   if (event.target.classList.contains('js-remove')) {
     const decision = confirm('Do you want to delete this record?');
@@ -148,9 +146,7 @@ function onDeletePost(event) {
   }
 }
 
-
 function sortBy() {
-
   const param = event.target.id;
 
   const elemsOfSort = document.querySelectorAll('.sort');

@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.use('/api/record', recordRouter);
 app.use(express.static(clientPath));
 
-
 app.listen(port, () => {
   console.log(`Server has been started on port ${port}`);
 });

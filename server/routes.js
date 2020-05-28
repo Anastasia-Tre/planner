@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
   res.status(200).json(records);
 });
 
-
 // http://localhost:5000/api/record/record (POST)
 router.post('/', async (req, res) => {
 
@@ -33,6 +32,5 @@ router.delete('/:id', async (req, res) => {
     message: 'Deleted'
   });
 });
-
 
 module.exports = router;

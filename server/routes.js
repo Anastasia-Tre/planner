@@ -13,14 +13,12 @@ router.get('/', async (req, res) => {
 
 // http://localhost:5000/api/record/record (POST)
 router.post('/', async (req, res) => {
-
   const newRecord = new Record(
     req.body.name,
     req.body.date,
     req.body.text,
     req.body.id
   );
-
   await Calendar.save(newRecord);
   res.status(201).json(newRecord);
 });

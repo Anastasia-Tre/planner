@@ -62,13 +62,11 @@ class RecordApi {
 
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
   RecordApi.fetch().then(backendRecords => {
     records = backendRecords;
     renderRecords(records);
   });
-
 
   modal = M.Modal.init(document.querySelector('.modal'));
 
@@ -79,14 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('#createRecord')
     .addEventListener('click', onCreateRecord);
-
   document.querySelector('#records').addEventListener('click', onDeletePost);
-
   document.querySelector('#sort-day').addEventListener('click', sortBy);
   document.querySelector('#sort-week').addEventListener('click', sortBy);
   document.querySelector('#sort-month').addEventListener('click', sortBy);
   document.querySelector('#sort-all').addEventListener('click', sortBy);
-
 });
 
 function renderRecords(_records = []) {
@@ -156,7 +151,6 @@ function sortBy() {
   document.getElementById(param).classList.add('active');
 
   const date = instancesDate[0].date || new Date();
-
   const sortedRecords = records.sort((a, b) =>
     (new Date(a._date) >= new Date(b._date) ? 1 : -1));
 

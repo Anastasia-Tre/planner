@@ -1,7 +1,6 @@
 'use strict';
 
 class Record {
-
   constructor(name, date, text) {
     this.name = name;
     this.date = date;
@@ -12,7 +11,6 @@ class Record {
   get name() {
     return this._name;
   }
-
   set name(value) {
     if (typeof value !== 'string') {
       console.log('Not a string');
@@ -23,7 +21,6 @@ class Record {
   get date() {
     return this._date;
   }
-
   set date(value) {
     if (value === '') {
       value = new Date();
@@ -34,7 +31,6 @@ class Record {
   get text() {
     return this._text;
   }
-
   set text(value) {
     if (value === undefined) {
       value = '';
@@ -45,7 +41,6 @@ class Record {
   get id() {
     return this._id;
   }
-
   set id(value) {
     if (value === undefined) {
       value = 0;
@@ -57,6 +52,5 @@ class Record {
     return new Date().getTime();
   }
 }
-
 
 module.exports = Record;

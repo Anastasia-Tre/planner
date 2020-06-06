@@ -4,7 +4,6 @@ const fs = require('fs');
 const Record = require('./record');
 
 class Calendar {
-
   checkfile() {
     try {
       this.file = fs.readFileSync('./server/data.json', 'utf-8');
@@ -50,14 +49,11 @@ function randomInteger(min, max) {
   return Math.floor(rand);
 }
 
-
 function generateEvents(n) {
-
   const names = [
     'Birthday', 'MeetUP', 'Shopping', 'Event', 'Meeting',
     'Game', 'Dinner', 'Lunch', 'Weekend', 'Task', 'Walking',
   ];
-
   const people = [
     'Mother', 'Father', 'Friend', 'Sister', 'Brother',
     'Aunt', 'Family', 'Friends', 'Boyfriend', 'Girlfriend',
@@ -71,6 +67,5 @@ function generateEvents(n) {
     writeToJSON(record);
   }
 }
-
 
 module.exports = new Calendar();

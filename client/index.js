@@ -59,7 +59,6 @@ class RecordApi {
       method: 'delete'
     }).then(res => res.json());
   }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -78,10 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#createRecord')
     .addEventListener('click', onCreateRecord);
   document.querySelector('#records').addEventListener('click', onDeletePost);
-  document.querySelector('#filter-day').addEventListener('click', sortBy);
-  document.querySelector('#filter-week').addEventListener('click', sortBy);
-  document.querySelector('#filter-month').addEventListener('click', sortBy);
-  document.querySelector('#filter-all').addEventListener('click', sortBy);
+  document.querySelector('#filter').addEventListener('click', sortBy);
 });
 
 function renderRecords(_records = []) {
@@ -95,21 +91,24 @@ function renderRecords(_records = []) {
   }
 }
 
-
 function onCreateRecord() {
-  const $name = document.querySelector('#name');
-  const $date = document.querySelector('#date');
-  const $time = document.querySelector('#time');
-  const $text = document.querySelector('#text');
-
+  const fields = {
+    name,
+    date,
+    time,
+    text
+  };
+  for (const elem in fields) {
+    fields[elem] = document.querySelector('#' + elem);
+  }
   instancesDate[1].date.setHours(instancesTime[0].hours,
     instancesTime[0].minutes);
 
-  if ($name.value && $date.value && $time.value) {
+  if (fields.name.value && fields.date.value && fields.time.value) {
     const newRecord = {
-      name: $name.value,
+      name: fields.name.value,
       date: instancesDate[1].date,
-      text: $text.value
+      text: fields.text.value
     };
 
     RecordApi.create(newRecord).then(record => {
@@ -117,10 +116,9 @@ function onCreateRecord() {
       renderRecords(records);
     });
     modal.close();
-    $name.value = '';
-    $date.value = '';
-    $time.value = '';
-    $text.value = '';
+    for (const elem in fields) {
+      fields[elem].value = '';
+    }
     M.updateTextFields();
   }
 }
@@ -128,10 +126,8 @@ function onCreateRecord() {
 function onDeletePost(event) {
   if (event.target.classList.contains('js-remove')) {
     const decision = confirm('Do you want to delete this record?');
-
     if (decision) {
       const id = event.target.getAttribute('record-id');
-
       RecordApi.remove(id).then(() => {
         const recordIndex = records.findIndex(record => record._id === id);
         records.splice(recordIndex, 1);
@@ -200,7 +196,6 @@ function sortBy() {
     'filter-month': filterByMonth,
     'filter-all': filterByAll
   };
-
   const result = parametrs[param](sortedRecords, date);
   renderRecords(result);
 }

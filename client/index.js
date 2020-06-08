@@ -78,10 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#createRecord')
     .addEventListener('click', onCreateRecord);
   document.querySelector('#records').addEventListener('click', onDeletePost);
-  document.querySelector('#sort-day').addEventListener('click', sortBy);
-  document.querySelector('#sort-week').addEventListener('click', sortBy);
-  document.querySelector('#sort-month').addEventListener('click', sortBy);
-  document.querySelector('#sort-all').addEventListener('click', sortBy);
+  document.querySelector('#filter-day').addEventListener('click', sortBy);
+  document.querySelector('#filter-week').addEventListener('click', sortBy);
+  document.querySelector('#filter-month').addEventListener('click', sortBy);
+  document.querySelector('#filter-all').addEventListener('click', sortBy);
 });
 
 function renderRecords(_records = []) {
@@ -141,6 +141,46 @@ function onDeletePost(event) {
   }
 }
 
+const filterByAll = (sortedRecords, date) => sortedRecords;
+
+const filterByDay = (sortedRecords, date) => {
+  const result = [];
+  for (const elem of sortedRecords) {
+    const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
+    const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
+    const checkDate = new Date(elem._date).getDate() === date.getDate();
+    if (checkYear && checkMonth && checkDate) {
+      result.push(elem);
+    }
+  }
+  return result;
+};
+
+const filterByWeek = (sortedRecords, date) => {
+  const result = [];
+  const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay() - 1));
+  const dayOfWeek2 = new Date(date.setDate(dayOfWeek1.getDate() + 7));
+  for (const elem of sortedRecords) {
+    if (new Date(elem._date) >= dayOfWeek1 &&
+    new Date(elem._date) <= dayOfWeek2) {
+      result.push(elem);
+    }
+  }
+  return result;
+};
+
+const filterByMonth = (sortedRecords, date) => {
+  const result = [];
+  for (const elem of sortedRecords) {
+    const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
+    const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
+    if (checkYear && checkMonth) {
+      result.push(elem);
+    }
+  }
+  return result;
+};
+
 function sortBy() {
   const param = event.target.id;
 
@@ -154,41 +194,13 @@ function sortBy() {
   const sortedRecords = records.sort((a, b) =>
     (new Date(a._date) >= new Date(b._date) ? 1 : -1));
 
-  let result = [];
+  const parametrs = {
+    'filter-day': filterByDay,
+    'filter-week': filterByWeek,
+    'filter-month': filterByMonth,
+    'filter-all': filterByAll
+  };
 
-  if (param === 'sort-day') {
-    for (const elem of sortedRecords) {
-      if (new Date(elem._date).getFullYear() === date.getFullYear() &&
-      new Date(elem._date).getMonth() === date.getMonth() &&
-      new Date(elem._date).getDate() === date.getDate()) {
-        result.push(elem);
-      }
-    }
-  }
-
-  if (param === 'sort-week') {
-    const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay() - 1));
-    const dayOfWeek2 = new Date(date.setDate(dayOfWeek1.getDate() + 7));
-
-    for (const elem of sortedRecords) {
-      if (new Date(elem._date) >= dayOfWeek1 &&
-      new Date(elem._date) <= dayOfWeek2) {
-        result.push(elem);
-      }
-    }
-  }
-
-  if (param === 'sort-month') {
-    for (const elem of sortedRecords) {
-      if (new Date(elem._date).getFullYear() === date.getFullYear() &&
-      new Date(elem._date).getMonth() === date.getMonth()) {
-        result.push(elem);
-      }
-    }
-  }
-
-  if (param === 'sort-all') {
-    result = sortedRecords;
-  }
+  const result = parametrs[param](sortedRecords, date);
   renderRecords(result);
 }

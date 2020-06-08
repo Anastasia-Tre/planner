@@ -12,40 +12,21 @@ class Record {
     return this._name;
   }
   set name(value) {
-    if (typeof value !== 'string') {
-      console.log('Not a string');
-    }
-    this._name = value;
+    this._name = value === undefined ? '' : value;
   }
 
   get date() {
     return this._date;
   }
   set date(value) {
-    if (value === '') {
-      value = new Date();
-    }
-    this._date = value;
+    this._date = value === undefined ? new Date() : value;
   }
 
   get text() {
     return this._text;
   }
   set text(value) {
-    if (value === undefined) {
-      value = '';
-    }
-    this._text = value;
-  }
-
-  get id() {
-    return this._id;
-  }
-  set id(value) {
-    if (value === undefined) {
-      value = 0;
-    }
-    this._id = value;
+    this._text = value === undefined ? '' : value;
   }
 
   getId() {

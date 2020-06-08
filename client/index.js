@@ -137,11 +137,11 @@ function onDeletePost(event) {
   }
 }
 
-const filterByAll = (sortedRecords, date) => sortedRecords;
+const filterByAll = records => records;
 
-const filterByDay = (sortedRecords, date) => {
+const filterByDay = (records, date) => {
   const result = [];
-  for (const elem of sortedRecords) {
+  for (const elem of records) {
     const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
     const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
     const checkDate = new Date(elem._date).getDate() === date.getDate();
@@ -152,11 +152,11 @@ const filterByDay = (sortedRecords, date) => {
   return result;
 };
 
-const filterByWeek = (sortedRecords, date) => {
+const filterByWeek = (records, date) => {
   const result = [];
   const dayOfWeek1 = new Date(date.setDate(date.getDate() - date.getDay() - 1));
   const dayOfWeek2 = new Date(date.setDate(dayOfWeek1.getDate() + 7));
-  for (const elem of sortedRecords) {
+  for (const elem of records) {
     if (new Date(elem._date) >= dayOfWeek1 &&
     new Date(elem._date) <= dayOfWeek2) {
       result.push(elem);
@@ -165,9 +165,9 @@ const filterByWeek = (sortedRecords, date) => {
   return result;
 };
 
-const filterByMonth = (sortedRecords, date) => {
+const filterByMonth = (records, date) => {
   const result = [];
-  for (const elem of sortedRecords) {
+  for (const elem of records) {
     const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
     const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
     if (checkYear && checkMonth) {
@@ -187,7 +187,7 @@ function sortBy() {
   document.getElementById(param).classList.add('active');
 
   const date = instancesDate[0].date || new Date();
-  const sortedRecords = records.sort((a, b) =>
+  records = records.sort((a, b) =>
     (new Date(a._date) >= new Date(b._date) ? 1 : -1));
 
   const parametrs = {
@@ -196,6 +196,6 @@ function sortBy() {
     'filter-month': filterByMonth,
     'filter-all': filterByAll
   };
-  const result = parametrs[param](sortedRecords, date);
+  const result = parametrs[param](records, date);
   renderRecords(result);
 }

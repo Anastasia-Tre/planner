@@ -98,7 +98,7 @@ function onCreateRecord() {
     time,
     text
   };
-  for (const elem in fields) {
+  for (const elem of Object.keys(fields)) {
     fields[elem] = document.querySelector('#' + elem);
   }
   instancesDate[1].date.setHours(instancesTime[0].hours,
@@ -116,7 +116,7 @@ function onCreateRecord() {
       renderRecords(records);
     });
     modal.close();
-    for (const elem in fields) {
+    for (const elem of Object.keys(fields)) {
       fields[elem].value = '';
     }
     M.updateTextFields();

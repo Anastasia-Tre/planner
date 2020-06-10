@@ -62,10 +62,14 @@ class RecordApi {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  RecordApi.fetch().then(backendRecords => {
-    records = backendRecords;
-    renderRecords(records);
-  });
+  RecordApi.fetch()
+    .then(backendRecords => {
+      records = backendRecords;
+      renderRecords(records);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 
   modal = M.Modal.init(document.querySelector('.modal'));
 
@@ -111,10 +115,15 @@ function onCreateRecord() {
       text: fields.text.value
     };
 
-    RecordApi.create(newRecord).then(record => {
-      records.push(record);
-      renderRecords(records);
-    });
+    RecordApi.create(newRecord)
+      .then(record => {
+        records.push(record);
+        renderRecords(records);
+      })
+      .catch(err => {
+        console.log('Err in function onCreateRecord \n', err);
+      });
+
     modal.close();
     for (const elem of Object.keys(fields)) {
       fields[elem].value = '';
@@ -128,11 +137,15 @@ function onDeletePost(event) {
     const decision = confirm('Do you want to delete this record?');
     if (decision) {
       const id = event.target.getAttribute('record-id');
-      RecordApi.remove(id).then(() => {
-        const recordIndex = records.findIndex(record => record._id === id);
-        records.splice(recordIndex, 1);
-        renderRecords(records);
-      });
+      RecordApi.remove(id)
+        .then(() => {
+          const recordIndex = records.findIndex(record => record._id === id);
+          records.splice(recordIndex, 1);
+          renderRecords(records);
+        })
+        .catch(err => {
+          console.log('Err in function onDeletePost', err);
+        });
     }
   }
 }

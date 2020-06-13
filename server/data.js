@@ -1,43 +1,42 @@
 'use strict';
 
-const fs = require('fs');
-const Record = require('./record');
+const fs = require('fs').promises;
 
 class Calendar {
   constructor() {
     this.path = './server/data.json';
   }
 
-  checkfile() {
+  async checkfile() {
     try {
-      this.file = fs.readFileSync(this.path, 'utf-8');
+      this.file = await fs.readFile(this.path, 'utf-8');
     } catch (error) {
-      fs.writeFileSync(this.path, '[]');
+      await fs.writeFile(this.path, '[]');
     }
   }
 
-  showAll() {
+  async showAll() {
     this.checkfile();
-    this.file = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-    return this.file;
+    this.file = await fs.readFile(this.path, 'utf-8');
+    return JSON.parse(this.file);
   }
 
-  save(record) {
+  async save(record) {
     this.checkfile();
-    this.file = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-    this.file.push(record);
-    fs.writeFileSync(this.path, JSON.stringify(this.file, null, 2));
+    this.file = await fs.readFile(this.path, 'utf-8');
+    const records = JSON.parse(this.file);
+    records.push(record);
+    await fs.writeFile(this.path, JSON.stringify(records, null, 2));
     return record;
   }
 
-  remove(id) {
+  async remove(id) {
     this.checkfile();
-    this.file = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
+    this.file = JSON.parse(await fs.readFile(this.path, 'utf-8'));
     const recordIndex = this.file.findIndex(record => record._id === id);
     this.file.splice(recordIndex, 1);
-    fs.writeFileSync(this.path, JSON.stringify(this.file, null, 2));
+    await fs.writeFile(this.path, JSON.stringify(this.file, null, 2));
   }
-
 }
 
 module.exports = new Calendar();

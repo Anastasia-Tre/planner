@@ -40,37 +40,4 @@ class Calendar {
 
 }
 
-//generateEvents(1);
-
-function writeToJSON(record) {
-  const path = './server/data.json';
-  const file = JSON.parse(fs.readFileSync(path, 'utf-8'));
-  file.push(record);
-  fs.writeFileSync(path, JSON.stringify(file, null, 2));
-}
-
-function randomInteger(min, max) {
-  const rand = min + Math.random() * (max - min);
-  return Math.floor(rand);
-}
-
-function generateEvents(n) {
-  const names = [
-    'Birthday', 'MeetUP', 'Shopping', 'Event', 'Meeting',
-    'Game', 'Dinner', 'Lunch', 'Weekend', 'Task', 'Walking',
-  ];
-  const people = [
-    'Mother', 'Father', 'Friend', 'Sister', 'Brother',
-    'Aunt', 'Family', 'Friends', 'Boyfriend', 'Girlfriend',
-  ];
-
-  for (let i = 0; i < n; i++) {
-    const name = names[randomInteger(0, names.length)] + ' with ' +
-          people[randomInteger(0, people.length)];
-    const date = new Date(2020, 4, randomInteger(1, 31), randomInteger(0, 23));
-    const record = new Record(name, date);
-    writeToJSON(record);
-  }
-}
-
 module.exports = new Calendar();

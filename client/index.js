@@ -7,7 +7,7 @@ const card = record => {
     month: 'short',
     day: 'numeric',
     hour: 'numeric',
-    minute: 'numeric'
+    minute: 'numeric',
   };
   return `
   <div class="card z-depth-2">
@@ -49,7 +49,7 @@ class RecordApi {
       body: JSON.stringify(record),
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     }).then(res => res.json());
   }
@@ -64,8 +64,7 @@ class RecordApi {
 document.addEventListener('DOMContentLoaded', () => {
   RecordApi.fetch()
     .then(backendRecords => {
-      records = backendRecords;
-      renderRecords(records);
+      renderRecords(backendRecords);
     })
     .catch(err => {
       console.log(err);

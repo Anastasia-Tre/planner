@@ -5,9 +5,10 @@ const filterByAll = records => records;
 const filterByDay = (records, date) => {
   const result = [];
   for (const elem of records) {
-    const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
-    const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
-    const checkDate = new Date(elem._date).getDate() === date.getDate();
+    const elemDate = new Date(elem._date);
+    const checkYear = elemDate.getFullYear() === date.getFullYear();
+    const checkMonth = elemDate.getMonth() === date.getMonth();
+    const checkDate = elemDate.getDate() === date.getDate();
     if (checkYear && checkMonth && checkDate) {
       result.push(elem);
     }
@@ -31,8 +32,9 @@ const filterByWeek = (records, date) => {
 const filterByMonth = (records, date) => {
   const result = [];
   for (const elem of records) {
-    const checkYear = new Date(elem._date).getFullYear() === date.getFullYear();
-    const checkMonth = new Date(elem._date).getMonth() === date.getMonth();
+    const elemDate = new Date(elem._date);
+    const checkYear = elemDate.getFullYear() === date.getFullYear();
+    const checkMonth = elemDate.getMonth() === date.getMonth();
     if (checkYear && checkMonth) {
       result.push(elem);
     }
